@@ -1,0 +1,22 @@
+import openai
+import os
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def generate(prompt, model="text-davinci-002", temperature=0.0,presence_penalty=2 ):
+  response = openai.Completion.create(
+    engine="text-davinci-002",
+    prompt=prompt,
+    temperature=temperature,
+    max_tokens=64,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=presence_penalty,
+    stop=["[END]"],
+    logprobs=1
+  )
+  return response['choices'][0]['text'].strip()
+
+prompt="Ethanol fuel -- Ethanol fuel is ethyl alcohol, the same type of alcohol found in alcoholic beverages, used as fuel. It is most often used as a motor fuel, mainly as a biofuel additive for gasoline. The first production car running entirely on ethanol was the Fiat 147, introduced in 1978 in Brazil by Fiat. Ethanol is commonly made from biomass such as corn or sugarcane. World ethanol production for transport fuel tripled between 2000 and 2007 from 17×10 liters (4.5×10 U.S. gal; 3.7×10 imp gal) to more than 52×10 liters (1.4×10 U.S. gal; 1.1×10 imp gal). From 2007 to 2008, the share of ethanol in global gasoline type fuel use increased from 3.7% to 5.4%. In 2011 worldwide ethanol fuel production reached 8.46×10 liters (2.23×10 U.S. gal; 1.86×10 imp gal) with the United States of America and Brazil being the top producers, accounting for 62.2% and 25% of global production, respectively. US ethanol production reached 57.54×10 liters (1.520×10 U.S. gal; 1.266×10 imp gal) in 2017-04.\nQuestion: is ethanol a good source of fuel for automobiles?\nAnswer: yes\n\nWater-fuelled car -- A water-fuelled car is an automobile that hypothetically derives its energy directly from water. Water-fuelled cars have been the subject of numerous international patents, newspaper and popular science magazine articles, local television news coverage, and websites. The claims for these devices have been found to be pseudoscience and some were found to be tied to investment frauds. These vehicles may be claimed to produce fuel from water on board with no other energy input, or may be a hybrid claiming to derive some of its energy from water in addition to a conventional source (such as gasoline).\nQuestion: is there an engine that runs on water?\nAnswer: no\n\nRenewable resource -- Renewable energy refers to the provision of energy via renewable resources which are naturally replenished fast enough as being used. It includes e.g. sunlight, wind, biomass, rain, tides, waves and geothermal heat. Renewable energy may replace or enhance fossil energy supply various distinct areas: electricity generation, hot water/space heating, motor fuels, and rural (off-grid) energy services.\nQuestion: is a renewable resource used for the generation of electricity answers.com?\nAnswer: yes\n\nEthanol fuel -- All biomass goes through at least some of these steps: it needs to be grown, collected, dried, fermented, distilled, and burned. All of these steps require resources and an infrastructure. The total amount of energy input into the process compared to the energy released by burning the resulting ethanol fuel is known as the energy balance (or ``energy returned on energy invested''). Figures compiled in a 2007 report by National Geographic Magazine point to modest results for corn ethanol produced in the US: one unit of fossil-fuel energy is required to create 1.3 energy units from the resulting ethanol. The energy balance for sugarcane ethanol produced in Brazil is more favorable, with one unit of fossil-fuel energy required to create 8 from the ethanol. Energy balance estimates are not easily produced, thus numerous such reports have been generated that are contradictory. For instance, a separate survey reports that production of ethanol from sugarcane, which requires a tropical climate to grow productively, returns from 8 to 9 units of energy for each unit expended, as compared to corn, which only returns about 1.34 units of fuel energy for each unit of energy expended. A 2006 University of California Berkeley study, after analyzing six separate studies, concluded that producing ethanol from corn uses much less petroleum than producing gasoline.\nQuestion: does ethanol take more energy make that produces?\nAnswer:"
+res = generate(prompt)
+res
